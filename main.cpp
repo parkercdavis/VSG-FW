@@ -5,10 +5,9 @@
 // Harrison
 //
 
-#include "IQMain.hpp"
+#include "mbed.h"
 
 int main()
 {
-
-    return IQModulator::IQModulatorMain();
+    return 0;
 }

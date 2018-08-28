@@ -19,7 +19,7 @@ namespace Common
         DigitalOut _RF1;
         DigitalOut _RF2;
         DigitalOut _Enable;
-        
+
     public:
 
         ///
@@ -66,6 +66,13 @@ namespace Common
             _Enable = 0;
         }
 
+        // Read
+        //
+        //
+        SPnTSwitchState Read()
+        {
+            return (_RF1) ? RF1 : RF2;
+        }
 
         ///
         // Toggle
