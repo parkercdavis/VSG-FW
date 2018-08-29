@@ -12,5 +12,8 @@
 
 int main()
 {
+    Common::PE43711Serial IQAtten();
+
+
     return 0;
 }

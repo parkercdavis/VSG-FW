@@ -2,12 +2,14 @@ Archive member included to satisfy reference by file (symbol)
 
 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_gpio.o)
                               ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/serial_api.o (gpio_init_in)
+./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+                              ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o (mbed::SPI::format(int, int))
 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_us_ticker_api.o)
                               ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/mbed_retarget.o (get_us_ticker_data)
 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_pinmap_common.o)
                               ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/analogin_api.o (pinmap_pinout)
 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_assert.o)
-                              ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/analogin_api.o (mbed_assert_internal)
+                              ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o (mbed_assert_internal)
 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_critical.o)
                               ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/flash_api.o (core_util_critical_section_enter)
 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(FilePath.o)
@@ -23,7 +25,7 @@ Archive member included to satisfy reference by file (symbol)
 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_poll.o)
                               ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/mbed_retarget.o (mbed::poll(mbed::pollfh*, unsigned int, int))
 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_wait_api_no_rtos.o)
-                              ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/mbed_board.o (wait_ms)
+                              ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o (wait)
 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_interface.o)
                               ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/mbed_retarget.o (mbed_interface_connected)
 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_semihost_api.o)
@@ -38,6 +40,14 @@ Archive member included to satisfy reference by file (symbol)
                               ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_error.o) (mbed_error_hist_put)
 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_floor.o)
                               ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/spi_api.o (floor)
+/Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o)
+                              ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o (fmodf)
+/Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_fmod.o)
+                              /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o) (__ieee754_fmodf)
+/Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+                              /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o) (__fdlib_version)
+/Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+                              /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o) (matherr)
 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-abs.o)
                               ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/serial_api.o (abs)
 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-errno.o)
@@ -199,15 +209,15 @@ Archive member included to satisfy reference by file (symbol)
 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_arm_fixunsdfsi.o)
                               /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-strtod.o) (__aeabi_d2uiz)
 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_arm_truncdfsf2.o)
-                              /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-svfscanf.o) (__aeabi_d2f)
+                              /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o) (__aeabi_d2f)
 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_arm_addsubsf3.o)
-                              ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/spi_api.o (__aeabi_fadd)
+                              ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o (__aeabi_fsub)
 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_arm_muldivsf3.o)
                               ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/analogin_api.o (__aeabi_fmul)
 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_arm_cmpsf2.o)
-                              ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/analogout_api.o (__aeabi_fcmplt)
+                              ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o (__aeabi_fcmpeq)
 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_arm_unordsf2.o)
-                              /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-strtod.o) (__aeabi_fcmpun)
+                              /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o) (__aeabi_fcmpun)
 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_arm_fixsfsi.o)
                               ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/analogout_api.o (__aeabi_f2iz)
 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7-m/libgcc.a(_arm_fixunssfsi.o)
@@ -269,11 +279,29 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/./main.o
  .data          0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/./main.o
  .bss           0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/./main.o
+ .group         0x0000000000000000        0xc ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .group         0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .group         0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .text          0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .data          0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .bss           0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text._ZN6Common13PE43711SerialD2Ev
+                0x0000000000000000       0x14 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text._ZN6Common13PE43711SerialD0Ev
+                0x0000000000000000       0x12 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text.gpio_read
+                0x0000000000000000       0x2c ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text.gpio_write
+                0x0000000000000000       0x2c ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text._ZN6Common13PE43711Serial22InternalSetAttenuationEh
+                0x0000000000000000       0x70 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .text._ZN11IQModulator11IQModulatorEv
-                0x0000000000000000        0x2 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+                0x0000000000000000      0x104 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .rodata._ZTVN6Common13PE43711SerialE
+                0x0000000000000000       0x14 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .rodata        0x0000000000000000       0x1c ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .rodata.gpio_read.str1.1
+                0x0000000000000000       0x63 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .comment       0x0000000000000000       0x80 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .ARM.attributes
                 0x0000000000000000       0x33 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
@@ -920,6 +948,51 @@ Discarded input sections
                 0x0000000000000000        0x4 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_gpio.o)
  .text.gpio_init_inout
                 0x0000000000000000       0x48 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_gpio.o)
+ .group         0x0000000000000000        0xc ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text          0x0000000000000000        0x0 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .data          0x0000000000000000        0x0 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .bss           0x0000000000000000        0x0 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text._ZN4mbed3SPID2Ev
+                0x0000000000000000        0x2 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text._ZN4mbed3SPI6unlockEv
+                0x0000000000000000       0x28 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text._ZN4mbed3SPID0Ev
+                0x0000000000000000        0xc ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text._ZN4mbed3SPI6aquireEv
+                0x0000000000000000       0x3c ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text._ZN4mbed3SPI8_acquireEv
+                0x0000000000000000       0x2c ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text._ZN4mbed3SPI6formatEii
+                0x0000000000000000       0x40 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text._ZN4mbed3SPI9frequencyEi
+                0x0000000000000000       0x38 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text._ZN4mbed3SPI5writeEi
+                0x0000000000000000       0x28 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text._ZN4mbed3SPI5writeEPKciPci
+                0x0000000000000000       0x3a ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text._ZN4mbed3SPIC2E7PinNameS1_S1_S1_
+                0x0000000000000000       0x38 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .text._ZN4mbed3SPI23set_default_write_valueEc
+                0x0000000000000000       0x1a ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .bss._ZN4mbed3SPI6_mutexE
+                0x0000000000000000        0x8 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .bss._ZN4mbed3SPI6_ownerE
+                0x0000000000000000        0x4 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .rodata._ZN4mbed3SPI6unlockEv.str1.1
+                0x0000000000000000       0x73 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .rodata._ZTVN4mbed3SPIE
+                0x0000000000000000       0x20 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .debug_info    0x0000000000000000      0x201 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .debug_abbrev  0x0000000000000000      0x142 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .debug_aranges
+                0x0000000000000000       0x70 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .debug_ranges  0x0000000000000000       0x60 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .debug_line    0x0000000000000000      0x2b6 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .debug_str     0x0000000000000000      0x50d ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .comment       0x0000000000000000       0x80 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .debug_frame   0x0000000000000000      0x154 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
+ .ARM.attributes
+                0x0000000000000000       0x33 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(SPI.o)
  .text          0x0000000000000000        0x0 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_us_ticker_api.o)
  .data          0x0000000000000000        0x0 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_us_ticker_api.o)
  .bss           0x0000000000000000        0x0 ./mbed/a7c7b631e539/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/libmbed.a(mbed_us_ticker_api.o)
@@ -1273,6 +1346,38 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x34 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_floor.o)
  .ARM.attributes
                 0x0000000000000000       0x2d /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_floor.o)
+ .text          0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o)
+ .data          0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o)
+ .bss           0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o)
+ .text.fmodf    0x0000000000000000       0xb8 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o)
+ .rodata.fmodf.str1.4
+                0x0000000000000000        0x6 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o)
+ .debug_frame   0x0000000000000000       0x3c /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o)
+ .ARM.attributes
+                0x0000000000000000       0x2d /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-wf_fmod.o)
+ .text          0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_fmod.o)
+ .data          0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_fmod.o)
+ .bss           0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_fmod.o)
+ .text.__ieee754_fmodf
+                0x0000000000000000      0x104 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_fmod.o)
+ .rodata.Zero   0x0000000000000000        0x8 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_fmod.o)
+ .debug_frame   0x0000000000000000       0x30 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_fmod.o)
+ .ARM.attributes
+                0x0000000000000000       0x2d /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-ef_fmod.o)
+ .text          0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+ .data          0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+ .bss           0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+ .data.__fdlib_version
+                0x0000000000000000        0x1 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+ .ARM.attributes
+                0x0000000000000000       0x2d /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_lib_ver.o)
+ .text          0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+ .data          0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+ .bss           0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+ .text.matherr  0x0000000000000000        0x4 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+ .debug_frame   0x0000000000000000       0x20 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
+ .ARM.attributes
+                0x0000000000000000       0x2d /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libm.a(lib_a-s_matherr.o)
  .text          0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-abs.o)
  .data          0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-abs.o)
  .bss           0x0000000000000000        0x0 /Applications/MBEDCLI.app/Contents/Resources/gcc/gcc-arm-none-eabi-6-2017-q2-update/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-abs.o)
