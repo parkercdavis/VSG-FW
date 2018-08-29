@@ -1,0 +1,2 @@
+BUILD/LPC1768.text,BUILD/LPC1768.data,BUILD/LPC1768.bss,[fill].text,[fill].data,[fill].bss,[lib]/c.a.text,[lib]/c.a.data,[lib]/c.a.bss,[lib]/gcc.a.text,[lib]/gcc.a.data,[lib]/gcc.a.bss,[lib]/mbed.a.text,[lib]/mbed.a.data,[lib]/mbed.a.bss,[lib]/misc.text,[lib]/misc.data,[lib]/misc.bss,mbed/a7c7b631e539.text,mbed/a7c7b631e539.data,mbed/a7c7b631e539.bss,static_ram,total_flash
+4,0,0,596,0,11,17139,2472,89,3168,0,0,3025,8,271,252,12,28,5346,264,257,3412,32286
