@@ -279,24 +279,47 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/./main.o
  .data          0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/./main.o
  .bss           0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/./main.o
+ .group         0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .group         0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .group         0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .group         0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .group         0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .group         0x0000000000000000        0xc ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .group         0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .group         0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .group         0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .group         0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .text          0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .data          0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .bss           0x0000000000000000        0x0 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text.gpio_read
+                0x0000000000000000       0x2c ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text._ZN6Common4SPDT4ReadEv
+                0x0000000000000000       0x12 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text.gpio_write
+                0x0000000000000000       0x2c ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text._ZN6Common4SPDT7DisableEv
+                0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text._ZN6Common4SPDT6EnableEv
+                0x0000000000000000        0x8 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text._ZN6Common4SPDT6ToggleEv
+                0x0000000000000000       0x30 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text._ZN6Common13PE43711Serial22InternalSetAttenuationEh
+                0x0000000000000000       0x70 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .text._ZN6Common13PE43711SerialD2Ev
                 0x0000000000000000       0x14 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .text._ZN6Common13PE43711SerialD0Ev
                 0x0000000000000000       0x12 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
- .text.gpio_read
-                0x0000000000000000       0x2c ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
- .text.gpio_write
-                0x0000000000000000       0x2c ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
- .text._ZN6Common13PE43711Serial22InternalSetAttenuationEh
-                0x0000000000000000       0x70 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text._ZN4mbed10DigitalOutC2E7PinName
+                0x0000000000000000       0x1a ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .text._ZN11IQModulator28ReceiveCommandFromControllerEv
+                0x0000000000000000        0x2 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .text._ZN11IQModulator11IQModulatorEv
-                0x0000000000000000      0x104 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+                0x0000000000000000      0x164 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .rodata._ZTVN6Common4SPDTE
+                0x0000000000000000       0x18 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
+ .rodata._ZTVN6Common6HMC349E
+                0x0000000000000000       0x18 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .rodata._ZTVN6Common13PE43711SerialE
                 0x0000000000000000       0x14 ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o
  .rodata        0x0000000000000000       0x1c ./BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o

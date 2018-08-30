@@ -13,6 +13,7 @@ namespace Common
     //
     // An enum representing the state that the switch is in.
     //
+
     enum SPnTSwitchState
     {
         BadState,
@@ -24,6 +25,17 @@ namespace Common
         RF6,
         RF7,
         RF8
+    };
+
+    enum OtherSwitchState
+    {
+
+    };
+
+    struct SwitchState
+    {
+        enum SPnTSwitchState SPNTState;    
+        enum OtherSwitchState OtherState;
     };
 
 
@@ -52,7 +64,7 @@ namespace Common
         // 
         // Return the state of the system.
         // 
-        virtual enum Read() = 0;
+        virtual int Read() = 0;
 
         // Toggle
         //

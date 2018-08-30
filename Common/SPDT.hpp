@@ -69,7 +69,7 @@ namespace Common
         // Read
         //
         //
-        SPnTSwitchState Read()
+        int Read()
         {
             return (_RF1) ? RF1 : RF2;
         }

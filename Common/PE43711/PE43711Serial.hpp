@@ -17,11 +17,27 @@ namespace Common
     {
     private:
 
+
+        //
+        // A pointer to the SPI bus that we want to use to control
+        // the attenuator.
+        //
+        // Note, we prefer the pointer here because multiple devices can happily
+        // share the same SPI bus.
+        // 
+        // Watch out for null pointers though...
         SPI* _SPI;
 
 
+        // Internal Set Attenuation
+        //
+        // This is the implementation of the virtual method in the parent class.
+        // Since this class is for the serial case, then we call the SPI bus
+        // to transmit our data to the attenuator.
+        //
         void InternalSetAttenuation(uint8_t AttenValue)
         {
+            // Handle null pointers *before* we try to talk.
             if(_SPI == (SPI*)0)
             {
                 return;

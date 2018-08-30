@@ -109,5 +109,6 @@ BUILD/LPC1768/GCC_ARM/IQModulator/IQModulator.o: \
  mbed/a7c7b631e539/platform/mbed_stats.h \
  mbed/a7c7b631e539/platform/Callback.h \
  mbed/a7c7b631e539/platform/FunctionPointer.h \
- mbed/a7c7b631e539/platform/ScopedLock.h Common/PE43711/PE43711.hpp \
+ mbed/a7c7b631e539/platform/ScopedLock.h Common/HMC349/HMC349.hpp \
+ Common/SPDT.hpp Common/Switch.hpp Common/PE43711/PE43711.hpp \
  Common/PE43711/PE43711Serial.hpp Common/PE43711/PE43711.hpp
