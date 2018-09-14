@@ -1,730 +1,816 @@
 //------------------------------------------------------------------------------------------
+// MAX2871 
 //
-//
+// Harrison Statham
 //
 
 #ifndef MAX2871_HPP
 #define MAX2871_HPP
 
+#include <functional>
 #include "stdint.h"
-
 #include "Macros.h"
-
 
 namespace RFVSG
 {
-    namespace Common
+
+    enum eFracNSigmaDeltaNoiseMode
     {
+        LowNoise,
+        Reserved,
+        LowSpur1,
+        LowSpur2        
+    };
+
+    enum ePolarity
+    {
+        Negative,
+        Positive
+    };
+
+
+    enum eLockDetectPrecision
+    {
+        TenNs,
+        SixNs
+    };
+
+
+    enum eLockDetectFunction
+    {
+        FracNLockDetect,
+        IntNLockDetect
+    };
+
+    enum eLockDetectSpeed
+    {
+        SlowerThan32MHz,
+        FasterThan32MHz
+    };
+
+    enum eLockDetectPinFunction
+    {
+        Low,
+        DigitalLock,
+        AnalogLock,
+        High
+    };
+
+    enum eChargePumpLinearityMode
+    {
+        Disabled,
+        TenPercent,
+        TwentyPercent,
+        ThirtyPercent
+    };
+
+    enum eChargePumpTestMode
+    {
+        Normal,
+        LongReset,
+        ForceIntoSource,
+        ForceIntoSink
+    };
+
+
+
+    class MAX2871
+    {
+
+    private:
         
-        namespace MAX2871
+        //-----------------------------------------------------
+        // Register 0
+        // 
+
+        union 
         {
-            enum LockDetectSpeed
+            struct
             {
-                Slow,
-                Fast
-            };
+                uint32_t Address                : 3;
+                uint32_t FractionalDivision     : 12;
+                uint32_t IntegerDivision        : 16;
+                uint32_t IsIntegerMode          : 1;
 
-            enum SigmaDeltaNoiseMode
-            {
-                LowNoise,
-                Reserved,
-                LowSpur1,
-                LowSpur2
-            };
+            } Bits;
 
-            enum MuxConfiguration
-            {
-                TriState,
-                PullUp,
-                PullDown,
-                RDivOutput,
-                NDivOutputOverTwo,
-                AnalogLockDetect,
-                DigitalLockDetect,
-                SyncInput,
-                Reserved1,
-                Reserved2,
-                Reserved3,
-                Reserved4,
-                ReadRegSix
-                // Higher order are reserved.
-            };
+            volatile uint32_t Value;
 
-            enum LockDetectFunction
-            {
-                FracNLockDetect,
-                IntNLockDetect
-            };
+        } _R0;
 
-            enum LockDetectPrecision
-            {
-                TenNS,
-                SixNS
-            };
 
-            enum PhaseDetectorPolarity
-            {
-                Negative,
-                Positive
-            };
 
-            enum ShutdownMode
+        //-----------------------------------------------------
+        //
+        union
+        {
+            struct
             {
-                Normal,
-                Shutdown
-            };
+                uint32_t Address                : 3;
+                uint32_t Modulus                : 12;
+                uint32_t Phase                  : 12;
+                uint32_t ChargePumpTest         : 2;
+                uint32_t ChargePumpLinearity    : 2;
+                uint32_t Reserved               : 1;
 
-            enum CounterResetMode
-            {
-                Normal,
-                RNReset
-            };
+            } Bits;
 
-            enum ChargePumpLinearity
-            {
-                Disabled,
-                Linearity10Percent,
-                Linearity20Percent,
-                Linearity30Percent
-            };
+            volatile uint32_t Value;
 
-            enum ChargePumpTestMode
+        } _R1;
+
+        
+
+        //-----------------------------------------------------
+        // 
+        union 
+        {
+            struct
             {
-                Normal,
-                LongReset,
-                ForceChargePumpIntoSource,
-                ForceChargePumpIntoSink
-            };
+                uint32_t Address                : 3;
+                uint32_t CounterReset           : 1;
+                uint32_t ChargePumpHighZ        : 1;
+                uint32_t Shutdown               : 1;
+                uint32_t PhaseDetectorPolarity  : 1;
+                uint32_t LockDetectPrecision    : 1;
+                uint32_t LockDetectFunction     : 1;
+                uint32_t ChargePumpCurrent      : 4;
+                uint32_t DoubleBufferMode       : 1;
+                uint32_t ReferenceDividerValue  : 10;
+                uint32_t ReferenceDivideBy2Mode : 1;
+                uint32_t ReferenceDoublerMode   : 1;
+                uint32_t MuxConfiguration       : 3;
+                uint32_t SigmaDeltaNoiseMode    : 2;
+                uint32_t LockDetectSpeed        : 1;
+
+            } Bits;
+
+            uint32_t Value;
+
+        } _R2;
+
+        
+
+
+
+
+        //-----------------------------------------------------
+        //
+        union
+        {
+            struct
+            {
+                uint32_t Address            : 3;
+                uint32_t ClockDividerValue  : 12;
+                uint32_t ClockDividerMode   : 2;
+                uint32_t MuteDelayMode      : 1;
+                uint32_t CycleSlipMode      : 1;
+                uint32_t Reserved           : 5;
+                uint32_t VASTemp            : 1;
+                uint32_t VASShutdown        : 1;
+                uint32_t VCO                : 6;
+
+            } Bits;
+
+            uint32_t Value;
+
+        } _R3;
+
+        
+
+        //-----------------------------------------------------
+        //
+        union
+        {
+            struct
+            {
+                uint32_t Address                : 3;
+                uint32_t RFOutputAPower         : 2;
+                uint32_t RFAEnable              : 1;
+                uint32_t RFOutputBPower         : 2;
+                uint32_t RFBEnable              : 1;
+                uint32_t RFBOutputPath          : 1;
+                uint32_t MuteUntilLockDetect    : 1;
+                uint32_t VCOShutdown            : 1;
+                uint32_t BandSelect             : 8;
+                uint32_t RFOutputDividerMode    : 3;
+                uint32_t VCOFeedbackMode        : 1;
+                uint32_t BandSelectMSB          : 2;
+                uint32_t ShutdownReferenceInput : 1;
+                uint32_t ShutdownVCODivider     : 1;
+                uint32_t ShutdownVCOLDO         : 1;
+                uint32_t Reserved               : 3;
+
+            } Bits;
+            
+            uint32_t Value;
+
+        } _R4;
+
+        
+
+        //-----------------------------------------------------
+        //
+        union
+        {
+            struct
+            {
+                uint32_t Address                : 3;
+                uint32_t ADCMode                : 3;
+                uint32_t ADCStart               : 1;
+                uint32_t Reserved1              : 11;
+                uint32_t MuxMSB                 : 1;
+                uint32_t Reserved2              : 3;
+                uint32_t LockDetectPinFunction  : 2;
+                uint32_t F01                    : 1;
+                uint32_t ShutdownPLL            : 1;
+                uint32_t Reserved3              : 3;
+                uint32_t VCOAutoselectDelay     : 2;
+                uint32_t Reserved4              : 1;
+            } Bits;
+
+            uint32_t Value;
+
+        } _R5;
+
+        
+        
+
+        //-----------------------------------------------------
+        //
+        union
+        {
+            struct
+            {
+                uint32_t Address        : 3;
+                uint32_t CurrentVCO     : 6;
+                uint32_t VASActive      : 1;
+                uint32_t Reserved1      : 5;
+                uint32_t ADCValid       : 1;
+                uint32_t ADCCode        : 7;
+                uint32_t PowerOnReset   : 1;
+                uint32_t Reserved2      : 4;
+                uint32_t DieID          : 4;
+
+            } Bits;
+            
+            uint32_t Value;
+
+        } _R6;
+
+        
+
+        //-----------------------------------------------------
+        //
+        std::function<void(int)>& ReadFunction;
+        
+        std::function<void(int)>& WriteFunction;
+
+        DigitalOut ChipEnable;
+
+        DigitalIn LD;
+
+        DigitalOut RFOutputEnable;
+
+        DigitalOut Mux;
+
+        float RSet;
+
+    
+    public:
+
+        #pragma region Constructors
+
+        MAX2871(std::function<void(int)> ReadFn, std::function<void(int)> WriteFn) : ReadFuncton(ReadFn), WriteFunction(WriteFn)
+        {
+
+            // Set the registers to their default values.
+            _R0 = 0x007D0000;
+            _R1 = 0x2000FFF9;
+            _R2 = 0x00004042;
+            _R3 = 0x0000000B;
+            _R4 = 0x6180B23C;
+            _R5 = 0x00400005;
+
+            // Note: Apart from setting the register value, we arent allowed to write to
+            // this register. However, the read_function *can* write to this register.
+            _R6 = 0x00000006;
         }
+
+        #pragma endregion
+
+        
+        //-----------------------------------------------------
+        //
+        #pragma region PLL Methods
+
+
+        bool IsFractionalNMode()
+        {
+            return !_R0.Bits.IsIntegerMode;
+        }
+
+
+        // Enable Fractional-N Mode
+        // 
+        void EnableFractionalNMode()
+        {
+            // Note: The LDF bit must be set accordingly!
+            // TODO: Check this out properly.
+           _R0.Bits.IsIntegerMode = 0; 
+        }
+
+
+        // Set Fractional-N Division Value
+        // 
+        // Set the frac-N value from 0 to 4095.
+        // See F01 bit.
+        // 
+        void SetFractionalDivisionValue(uint16_t Value)
+        {
+            // The top four bits should ALWAYS be zero.
+            Value &= 0x0FFF;
+
+            _R0.Bits.FractionalDivision = Value; // Can I do this without shifting Value???
+        }
+
+
+        // Set F01
+        //
+        // Sets integer mode for F = 0.
+        // 
+        void SetF01(bool State)
+        {
+
+        }
+
+
+        void SetModulus(uint16_t Value)
+        {
+            // Value must always be greater than 1 and less than 4096.
+            Value &= 0xFFE;
+
+            _R1.Bits.Modulus = Value;
+        }
+
+
+        void SetSigmaDeltaNoiseMode(eFracNSigmaDeltaNoiseMode NoiseMode)
+        {
+            if(NoiseMode != eFracNSigmaDeltaNoiseMode::Reserved)
+            {
+                _R2.Bits.SigmaDeltaNoiseMode = NoiseMode;
+            }
+        }
+
+        
+        void SetIntegerDivisionValue(uint16_t Value)
+        {
+            if(IsFractionalNMode())
+            {
+                // Integer-N value must be betweeen 19 and 4091 inclusive while
+                // in fractional-n mode.
+                if(Value >= 19 && Value <= 4091)
+                {
+                    _R0.Bits.IntegerDivision = Value;
+                }
+            }
+            else
+            {
+                // Integer-N value must be greater than 15 in integer-n mode.
+                if(Value > 15)
+                {
+                    _R0.Bits.IntegerDivision = Value;
+                }
+            }
+        }
+
+
+        // Enable Fractional-N Mode
+        // 
+        void EnableIntegerNMode()
+        {
+            // Note: The LDF bit must be set accordingly!
+            // TODO: Check this out properly.
+           _R0.Bits.IsIntegerMode = 1; 
+        }
+
+
+        // Is Integer N Mode
+        // 
+        bool IsIntegerNMode()
+        {
+            return _R0.Bits.IsIntegerMode;
+        }
+
+        
+        // Reset R/N Counter
+        // 
+        // Reset the R & N counters in the device.
+        //
+        void ResetRNCounter()
+        {
+            _R2.Bits.CounterReset = 1;
+        }
+
+
+        // Set Phase Detector Polarity
+        //
+        void SetPhaseDetectorPolarity(ePolarity Polarity)
+        {
+            _R2.Bits.PhaseDetectorPolarity = Polarity;
+        }
+
+        
+        // Set Lock Detect Precision
+        void SetLockDetectPrecision(eLockDetectPrecision Precision)
+        {
+            _R2.Bits.LockDetectPrecision = Precision;
+        }
+
+        
+        // Set Lock Detect Function
+        //
+        void SetLockDetectFunction(eLockDetectFunction Func)
+        {
+            _R2.Bits.LockDetectFunction = Func;
+        }
+
+
+        // Set Lock Detect Speed
+        //
+        void SetLockDetectSpeed(eLockDetectSpeed Speed)
+        {
+            _R2.Bits.LockDetectSpeed = Speed;
+        }
+
+
+        // Set Lock Detect Pin Function
+        //
+        void SetLockDetectPinFunction(eLockDetectPinFunction PinFunction)
+        {
+            _R5.Bits.LockDetectPinFunction = PinFunction;
+        }
+
+
+        // Enable Slip Cycle Reduction
+        void EnableSlipCycleReduction()
+        {
+            _R3.Bits.CycleSlipMode = 1;
+        }
+
+
+        // Disable Slip Cycle Reduction
+        //
+        void DisableSlipCycleReduction()
+        {
+            _R3.Bits.CycleSlipMode = 0;
+        }
+
+
+        // 
+        void EnablePLL()
+        {
+            _R5.Bits.ShutdownPLL = 0;
+        }
+
+        void ShutdownPLL()
+        {
+            _R5.Bits.ShutdownPLL = 1;
+        }
+
+        #pragma endregion
+
+
+        //-----------------------------------------------------
+        //
+        #pragma region Charge Pump
+
+
+        // Set Charge Pump Test Mode
+        // 
+        void SetChargePumpTestMode(eChargePumpTestMode TestMode)
+        {
+            _R1.Bits.ChargePumpTest = TestMode;
+        }
+
+
+        // Set Charge Pump Linearity
+        // 
+        void SetChargePumpLinearity(eChargePumpLinearityMode LinearityMode)
+        {
+            _R1.Bits.ChargePumpLinearity = LinearityMode;
+        }
+
+
+        // Enable Charge Pump High Impedance
+        // 
+        void EnableChargePumpHighZ()
+        {
+            _R2.Bits.ChargePumpHighZ = 1;
+        }
+
+
+        void DisableChargePumpHighZ()
+        {
+            _R2.Bits.ChargePumpHighZ = 0;
+        }
+
+
+        void SetChargePumpCurrent(uint8_t Current)
+        {
+            // Only the lower four bits can be set.
+            Current &= 0x0F;
+
+            _R2.Bits.ChargePumpCurrent = Current;
+        }
+
+
+        //
+        float CalculateChargePumpCurrent()
+        {
+            uint8_t CPCurrent = _R2.Bits.ChargePumpCurrent;
+
+            return (1.63/RSet)*(1 + CPCurrent);
+        }
+
+        #pragma endregion
+
+
+        //-----------------------------------------------------
+        //
+        #pragma region Reference Input
+
+
+        // Set Reference Divider Value (R)
+        void SetReferenceDividerValue(uint16_t Value)
+        {
+            // Only the top 10 bits can be set.
+            Value &= 0x3FF;
+
+            _R2.Bits.ReferenceDividerValue = Value;
+        }
+
+
+        void EnableReferenceDivideBy2()
+        {
+            _R2.Bits.ReferenceDivideBy2Mode = 1;
+        }
+
+
+        void DisableReferenceDivideBy2()
+        {
+            _R2.Bits.ReferenceDivideBy2Mode = 0;
+        }
+
+
+        void EnableReferenceDoubler()
+        {
+            _R2.Bits.ReferenceDoublerMode = 1;
+        }
+
+
+        void DisableReferenceDoubler()
+        {
+            _R2.Bits.ReferenceDoublerMode = 0;
+        }
+
+        void EnableReferenceInput()
+        {
+            _R4.Bits.ShutdownReferenceInput = 0;
+        }
+
+        void DisableReferenceInput()
+        {
+            _R4.Bits.ShutdownReferenceInput = 1;
+        }
+
+
+        #pragma endregion
+
+
+
+        //-----------------------------------------------------
+        //
+        #pragma region VCO
+
+        void SetVCO(uint8_t VCO)
+        {
+            // Check to see if VAS is disabled first.
+            if(!IsVCOAutoSelectEnabled())
+            {
+                VCO &= 0x3F;
+
+                _R3.Bits.VCO = VCO;
+            }
+        }
+
+        void EnableVCO()
+        {
+            _R4.Bits.VCOShutdown = 0;
+        }
+
+        void DisableVCO()
+        {
+            _R4.Bits.VCOShutdown = 1;
+        }
+
+        void SetVCOFeedbackMode()
+        {
+            
+        }
+
+        void ShutdownVCODivider(bool State)
+        {
+
+        }
+
+        void ShutdownVCOLDO(bool State)
+        {
+            
+        }
+
+        void SetVCOAutoselectDelay()
+        {
+            
+        }
+
+        void GetCurrentVCO()
+        {
+
+        }
+
+        bool IsVCOAutoSelectEnabled()
+        {
+
+        }
+
+        #pragma endregion
+
+        //-----------------------------------------------------
+        //
+        #pragma region RF Outputs
+
+        void SetPhase(uint16_t Value)
+        {
+
+        }
+
+        void SetRFOutputAPower(uint8_t Power)
+        {
+
+        }
+
+        void SetRFOutputAEnable(bool State)
+        {
+
+        }
+
+        void SetRFOutputBPower(uint8_t Power)
+        {
+
+        }
+
+        void SetRFOutputBEnable(bool State)
+        {
+
+        }
+
+        void SetRFOutputBPath(bool Path)
+        {
+
+        }
+
+        void SetMuteUntilLockDetect(bool State)
+        {
+
+        }
+
+        void SetRFOutputDividerMode()
+        {
+
+        }
+
+        #pragma endregion
+
+
+        //-----------------------------------------------------
+        //
+        #pragma region Digital Inputs/Outputs
+        
+        void Shutdown(bool State)
+        {
+
+        }
+
+        void SetMuxConfiguration(uint8_t Value)
+        {
+
+        }
+
+        void SetMuxMSB()
+        {
+
+        }
+
+        bool IsPowerOnReset()
+        {
+
+        }
+
+        uint8_t GetDieID()
+        {
+            
+        }
+
+        #pragma endregion
+
+
+        //-----------------------------------------------------
+        //
+        #pragma region ADC
+
+        void SetADCMode()
+        {
+
+        }
+
+        void SetADCStart()
+        {
+
+        }
+
+        bool IsADCValid()
+        {
+
+        }
+
+        uint8_t GetADCCode()
+        {
+
+        }
+
+        #pragma endregion
+
+
+
+        //-----------------------------------------------------
+        //
+        #pragma region Misc Methods
+
+
+        void SetDoubleBufferMode(bool State)
+        {
+
+        }
+
+        void SetClockDividerValue(uint16_t Value)
+        {
+
+        }
+
+        void SetClockDividerMode(uint8_t Mode)
+        {
+
+        }
+
+        void SetMuteDelayState(bool State)
+        {
+
+        }
+
         
 
-
-        //----------------------------------------------------------------------------------
-        //
-        //
-        class Max2871
+        void SetVASTempResponseState(bool State)
         {
-            private:
 
-                //--------------------------------------------------------------------------
-                // Register 0
-                //
-                // BIT      BIT ID  NAME                    DEFINITION
-                // 31       INT     Int-N or Frac-N Mode    0 = Enables the fractional-N mode 
-                //                                          1 = Enables the integer-N mode 
-                // * The LDF bit must also be set to the appropriate mode.
-                //
-                // 30:15    N[15:0]     Int Division Val    Sets integer part (N-divider) of the 
-                //                                          feedback divider factor. All integer values 
-                //                                          from 16 to 65,535 are allowed for integer mode. 
-                //                                          Integer values from 0 to 15 are not allowed. 
-                //                                          Integer values from 19 to 4091 are allowed for 
-                //                                          fractional mode.
-                //
-                // 14:3     FRAC[11:0]  Fractional Div Val  Sets fractional value:  000000000000 = 0 
-                //                                                                  000000000001 = 1 
-                //                                                                  111111111110 = 4094 
-                //                                                                  111111111111 = 4095
-                // * See F0I bit description
-                //
-                // 2:0      ADDR[2:0]   Address Bits        Register address bits, 000
-                //
-                //
-                volatile uint32_t _R0 = 0x007D0000;
+        }
 
-                
-                //--------------------------------------------------------------------------
-                // Register 1
-                //                
-                // BIT      BIT ID      NAME                DEFINITION
-                //-----------------------------------------------------------------
-                // 31       Reserved    Reserved            Reserved. Program to 0.
-                //
-                // 30:29    CPL[1:0]    CP Linearity        Sets CP linearity mode.  
-                //                                          00 = Disables the CP linearity mode (integer-N mode) 
-                //                                          01 = CP linearity 10% mode (frac-N mode)
-                //                                          10 = CP linearity 20% mode (frac-N mode)
-                //                                          11 = CP linearity 30% mode (frac-N mode)
-                //
-                // 28:27    CPT[1:0]    Charge Pump Test    Sets charge-pump test modes. 
-                //                                          00 = Normal mode
-                //                                          01 = Long Reset mode
-                //                                          10 = Force CP into source mode 
-                //                                          11 = Force CP into sink mode
-                //
-                // 26:15    P[11:0]     Phase Value         Sets phase value. See the Phase Adjustment section. 
-                //                                          000000000000 = 0
-                //                                          000000000001 = 1 (recommended)
-                //                                          -----
-                //                                          111111111111 = 4095
-                //
-                // 14:3     M[11:0]     Modulus Value (M)   Fractional modulus value used to program fVCO. 
-                //                                          See the Int, Frac, Mod and R Counter Relationship section. 
-                //                                          Double buffered by register 0. 
-                //                                          000000000000 = Not Valid
-                //                                          000000000001 = Not Valid
-                //                                          000000000010 = 2 
-                //                                          -----
-                //                                          111111111111 = 4095
-                //
-                // 2:0      ADDR[2:0]   Address Bits        Control Register address bits, 001
-                
-                volatile uint32_t _R1 = 0x2000FFF9;
+        void SetVASShutdownState(bool State)
+        {
 
+        }
 
-                //--------------------------------------------------------------------------
-                // Register 2
-                //
-                // BIT      BIT ID      NAME                DEFINITION
-                //-----------------------------------------------------------------
-                // 31       LDS         Lock-Detect Speed   Lock-detect speed adjustment. 
-                //                                          0 = fPFD ≤ 32MHz
-                //                                          1 = fPFD > 32MHz
-                //
+        void SetBandSelect(uint8_t Band)
+        {
 
-                
+        }
 
-                void SetLockDetectSpeed(enum MAX2871::LockDetectSpeed Speed)
-                {
-                    if(Speed == MAX2871::LockDetectSpeed::Slow)
-                    {
-                        CLEAR_BIT(_R2, 31)
-                    }
-                    else
-                    {
-                        SET_BIT(_R2, 31)
-                    }
-                }
+        void SetBandSelectMSB()
+        {
 
-                enum MAX2871::LockDetectSpeed GetLockDetectSpeed()
-                {
-                    return (MAX2871::LockDetectSpeed ((_R2 >> 31) & 0x1)); // Can this cast be done???
-                }
+        }
 
-                // 30:29    SDN[1:0]    Frac-N Sigma Delta  Sets noise mode (see the Low-Spur Mode section.) 
-                //                      Noise Mode          00 = Low-noise mode
-                //                                          01 = Reserved
-                //                                          10 = Low-spur mode 1
-                //                                          11 = Low-spur mode 2
-                //
+        
 
-                
-                void SetSigmaDeltaNoiseMode(enum MAX2871::SigmaDeltaNoiseMode NoiseMode)
-                {
-                    switch(NoiseMode)
-                    {
-                        case MAX2871::SigmaDeltaNoiseMode::LowNoise:
+        bool IsVASActive()
+        {
 
-                            CLEAR_BITS(_R2, 29, 30)
+        }
 
-                        break;
+        #pragma endregion
 
-                        case MAX2871::SigmaDeltaNoiseMode::Reserved:
+    }; // end class MAX2871
 
-                        break;
-
-                        case MAX2871::SigmaDeltaNoiseMode::LowSpur1:
-
-                            SET_BIT(_R2, 30)
-                            CLEAR_BIT(_R2, 29)
-
-                        break;
-
-                        case MAX2871::SigmaDeltaNoiseMode::LowSpur2:
-
-                            SET_BITS(_R1, 29, 30)
-
-                        break;
-                    }
-                }
-
-                enum MAX2871::SigmaDeltaNoiseMode GetSigmaDeltaNoiseMode()
-                {
-                    enum MAX2871::SigmaDeltaNoiseMode Mode;
-
-                    uint32_t TestModeBits = (_R1 >> 27) & 0x11;
-                    
-                    switch(TestModeBits)
-                    {
-                        case 0: Mode = MAX2871::SigmaDeltaNoiseMode::Normal;
-                        break;
-
-                        case 1: Mode = MAX2871::SigmaDeltaNoiseMode::LongReset;
-                        break;
-
-                        case 2: Mode = MAX2871::SigmaDeltaNoiseMode::ForceChargePumpIntoSource;
-                        break;
-
-                        case 3: Mode = MAX2871::SigmaDeltaNoiseMode::ForceChargePumpIntoSink;
-                        break;
-                    }
-
-                    return TestMode;
-                }
-
-
-                // 28:26    MUX[2:0]    MUX Configuration   Sets MUX pin con guration (MSB bit located register 05). 
-                //                                          0000 = Three-state output
-                //                                          0001 = D_VDD
-                //                                          0010 = D_GND
-                //                                          0011 = R-divider output 
-                //                                          0100 = N-divider output/2 
-                //                                          0101 = Analog lock detect 
-                //                                          0110 = Digital lock detect 
-                //                                          0111 = Sync Input
-                //                                          1000 : 1011 = Reserved
-                //                                          1100 = Read SPI registers 06 
-                //                                          1101 : 1111= Reserved
-                
-
-                void SetMuxConfiguration(enum MAX2871::MuxConfiguration Config)
-                {
-
-                }
-
-                enum MAX2871::MuxConfiguration GetMuxConfiguration()
-                {
-
-                }
-
-                // 25       DBR         Reference Doubler   Sets reference doubler mode. 
-                //                                          0 = Disable reference doubler 
-                //                                          1 = Enable reference doubler
-                
-                void SetReferenceDoubler(bool State)
-                {
-
-                }
-
-                bool GetReferenceDoublerState()
-                {
-
-                }
-
-                // 24       RDIV2       Reference Div2      Sets reference divide-by-2 mode. 
-                //                                          0 = Disable reference divide-by-2 
-                //                                          1 = Enable reference divide-by-2
-                
-                void SetReferenceDivider2(bool State)
-                {
-
-                }
-
-                // 23:14    R[9:0]      Reference Divider   Sets reference divide value (R). 
-                //                                          Double buffered by register 0. 
-                //                                          0000000000 = 0 (unused)
-                //                                          0000000001 = 1
-                //                                          -----
-                //                                          1111111111 = 1023
-                
-                void SetReferenceDividerValue(uint16_t Value)
-                {
-
-                }
-
-                uint16_t GetReferenceDividerValue()
-                {
-
-                }
-
-                // 13       REG4DB      Double Buffer       Sets double buffer mode. 0 = Disabled 1 = Enabled
-                
-                void SetDoubleBufferState(bool State)
-                {
-
-                }
-
-                bool GetDoubleBufferState()
-                {
-
-                }
-
-                // 12:9     CP[3:0]     Charge-Pump Current Sets charge-pump current in mA (RSET = 5.1kΩ). 
-                //                                          Double buffered by register 0. 
-                //                                          ICP = 1.63/RSET × (1+CP[3:0])
-                
-                void SetChargePumpCurrent(uint8_t Value)
-                {
-                    // MUST know what RSet is!
-                }
-
-                uint8_t GetChargePumpCurrentBinary()
-                {
-
-                }
-
-                double GetChargePumpCurrentDouble()
-                {
-
-                }
-
-                // 8        LDF         Lock-Detect Fn      Sets lock-detect function. 
-                //                                          0 = Frac-N lock detect
-                //                                          1 = Int-N lock detect
-                
-                
-
-
-                void SetLockDetectFunction(enum MAX2871::LockDetectFunction Fn)
-                {
-
-                }
-
-                enum MAX2871::LockDetectFunction GetLockDetectFunction()
-                {
-
-                }
-
-                // 7        LDP         Lock-Detect Prec.   Sets lock-detect precision. 0 = 10ns 1 = 6ns
-                
-                
-
-                void SetLockDetectFunction(enum MAX2871::LockDetectPrecision Precision)
-                {
-
-                }
-
-                enum MAX2871::LockDetectPrecision GetLockDetectPrecision()
-                {
-
-                }
-
-                // 6        PDP         Phase Detector Pol. Sets phase detector polarity. 
-                //                                          0 = Negative 
-                //                                          1 = Positive (default)
-
-                void SetPhaseDetectorPolarity(enum MAX2871::PhaseDetectorPolarity Polarity)
-                {
-
-                }
-
-                enum MAX2871::PhaseDetectorPolarity GetPhaseDetectorPolarity()
-                {
-
-                }
-
-
-                // 5        SHDN        Shutdown Mode       Sets power-down mode. 0 = Normal mode 1 = Device shutdown
-
-                void SetShutdownMode(enum MAX2871::ShutdownMode Shutdown)
-                {
-
-                }
-
-                enum MAX2871::ShutdownMode GetShutdownMode()
-                {
-
-                }
-                
-
-                // 4        TRI         Charge Pump Output  Sets charge-pump output high-impedance mode. 
-                //                      High Impedance      0 = Disabled
-                //                                          1 = Enabled
-                
-                void SetChargePumpOutputHighZ(bool State)
-                {
-
-                }
-
-                bool GetChargePumpOutputHighZ()
-                {
-
-                }
-
-                // 3        RST         Counter Reset       Sets counter reset mode. 
-                //                                          0 = Normal operation
-                //                                          1 = R and N counters reset
-
-                void SetCounterReset(enum MAX2871::CounterResetMode CounterReset)
-                {
-
-                }
-
-                enum MAX2871::CounterResetMode GetCounterResetMode()
-                {
-                    
-                }
-                
-
-                // 2:0      ADDR[2:0]   Address Bits        Control Register address bits, 010
-                
-                volatile uint32_t _R2 = 0x00004042;
-
-
-                //--------------------------------------------------------------------------
-                // Register 3
-                //
-                volatile uint32_t _R3 = 0x0000000B;
-
-
-                //--------------------------------------------------------------------------
-                // Register 4
-                //
-                volatile uint32_t _R4 = 0x6180B23C;
-
-
-                //--------------------------------------------------------------------------
-                // Register 5
-                //
-                volatile uint32_t _R5 = 0x00400005;
-
-
-                //--------------------------------------------------------------------------
-                // Register 6 (Read Only)
-                //
-                volatile uint32_t _R6 = 0x00000000;
-
-
-            public:
-
-                #pragma region Constructors
-
-                Max2871()
-                {
-                    // Setup SPI (if needed)
-                    // Try talking to the device.
-                    // Try setting the basic registers to their default values.
-                    // Must write twice to ensure proper setup.
-                    // Initialize anything else.
-                }
-
-                #pragma endregion
-
-
-                //--------------------------------------------------------------------------
-                // Fractional-N or Integer-N Mode
-                //
-                // All the code herein is related to setting the parameters of fractional-N
-                // or integer-N mode.
-                //
-
-                #pragma region FracN/IntN Mode
-
-                void SetFracNMode(bool FracNMode)
-                {
-                    if(FracNMode)
-                    {
-                        // Set the fracN bit
-                        CLEAR_BIT(_R0, 31)
-                    }
-                    else
-                    {
-                        // Clear the bit designating integer-N mode.
-                        SET_BIT(_R0, 31)
-                    }
-
-                    // Make sure LDF bit is set to appropriate mode.
-                    // If LDF is not correctly set, then pick a value to force the device into
-                    // compliance...
-                }
-
-                bool IsFracNMode()
-                {
-                    return GET_BIT(_R0, 31);
-                }
-
-                bool IsIntNMode()
-                {
-                    return !IsFracNMode();
-                }
-
-                void SetIntegerNDivisionValue(uint16_t IntegerNDivValue)
-                {
-                    if(IntegerNDivValue > 15)
-                    {
-                        if(IsFracNMode())
-                        {
-                            if(IntegerNDivValue >= 19 && IntegerNDivValue <= 4091)
-                            {
-                                _R0 |= (IntegerNDivValue << 15);
-                            }
-                        }
-                        else
-                        {
-                            _R0 |= (IntegerNDivValue << 15);
-                        }
-                    }
-                }
-
-                void SetFracNDivisionValue(uint16_t FracNDivValue)
-                {
-                    // Clear the top four bits to ensure we dont override other values.
-                    _R0 |= (FracNDivValue & 0b0000111111111111) << 3;
-                }
-
-
-                #pragma endregion
-
-
-
-                //--------------------------------------------------------------------------
-                // Charge Pump and Loop Filter
-                //
-
-                #pragma region Charge Pump and Loop Filter
-
-                
-
-                #pragma end region
-
-
-                void SetPhaseValueAdjustment(uint16_t Value)
-                {
-                    if(Value > 4095) Value = 4095;
-
-                    _R1 |= ((uint32_t)Value) << 15;
-                }
-
-                uint16_t GetPhaseValueAdjustment()
-                {
-                    return (uint16_t)((_R1 >> 15) & 0b00000000000000000000111111111111); // Need to verify...
-                }
-
-
-                void SetChargePumpTestMode(enum MAX2871::ChargePumpTestMode TestMode)
-                {
-                    switch(TestMode)
-                    {
-                        case MAX2871::ChargePumpTestMode::Normal:
-
-                            CLEAR_BITS(_R1, 27, 28)
-
-                        break;
-
-                        case MAX2871::ChargePumpTestMode::LongReset:
-
-                            SET_BIT(_R1, 27)
-                            CLEAR_BIT(_R1, 28)
-
-                        break;
-
-                        case MAX2871::ChargePumpTestMode::ForceChargePumpIntoSource:
-
-                            SET_BIT(_R1, 28)
-                            CLEAR_BIT(_R1, 27)
-
-                        break;
-
-                        case MAX2871::ChargePumpTestMode::ForceChargePumpIntoSink:
-
-                            SET_BITS(_R1, 27, 28)
-
-                        break;
-                    }
-                }
-
-                enum MAX2871::ChargePumpTestMode GetChargePumpTestMode()
-                {
-                    enum MAX2871::ChargePumpTestMode TestMode;
-
-                    uint32_t TestModeBits = (_R1 >> 27) & 0x11;
-                    
-                    switch(TestModeBits)
-                    {
-                        case 0: TestMode = MAX2871::ChargePumpTestMode::Normal;
-                        break;
-
-                        case 1: TestMode = MAX2871::ChargePumpTestMode::LongReset;
-                        break;
-
-                        case 2: TestMode = MAX2871::ChargePumpTestMode::ForceChargePumpIntoSource;
-                        break;
-
-                        case 3: TestMode = MAX2871::ChargePumpTestMode::ForceChargePumpIntoSink;
-                        break;
-                    }
-
-                    return TestMode;
-                }
-
-
-                void SetChargePumpLinearity(enum MAX2871::ChargePumpLinearity Linearity)
-                {
-                    switch(Linearity)
-                    {
-                        case MAX2871::ChargePumpLinearity::Disabled:
-
-                            CLEAR_BITS(_R1, 29, 30)
-
-                        break;
-
-                        case MAX2871::ChargePumpLinearity::Linearity10Percent:
-
-                            SET_BIT(_R1, 29)
-                            CLEAR_BIT(_R1, 30)
-
-                        break;
-
-                        case MAX2871::ChargePumpLinearity::Linearity20Percent:
-
-                            SET_BIT(_R1, 30)
-                            CLEAR_BIT(_R1, 29)
-
-                        break;
-
-                        case MAX2871::ChargePumpLinearity::Linearity30Percent:
-
-                            SET_BIT(_R1, 29)
-                            SET_BIT(_R1, 30)
-
-                        break;
-                    }
-                }
-
-                enum MAX2871::ChargePumpLinearity GetChargePumpLinearity()
-                {
-                    enum MAX2871::ChargePumpLinearity Linearity;
-
-                    uint32_t LinearityBits = (_R1 >> 29) & 0x11;
-                    
-                    switch(LinearityBits)
-                    {
-                        case 0: Linearity = MAX2871::ChargePumpLinearity::Disabled;
-                        break;
-
-                        case 1: Linearity = MAX2871::ChargePumpLinearity::Linearity10Percent;
-                        break;
-
-                        case 2: Linearity = MAX2871::ChargePumpLinearity::Linearity20Percent;
-                        break;
-
-                        case 3: Linearity = MAX2871::ChargePumpLinearity::Linearity30Percent;
-                        break;
-                    }
-
-                    return Linearity;
-                }
-
-
-
-                void SetFracNModulusValue(uint16_t Value)
-                {
-                    // Cap the value at 4095 (2^12 - 1)
-                    if(Value > 4095) Value = 4095;
-
-                    _R1 |= ((uint32_t)Value) << 3;
-                }
-
-                uint16_t GetFracNModulusValue()
-                {
-                    return (uint16_t)((_R1 >> 3) & 0b00000000000000000000111111111111); // Need to verify...
-                }
-
-                //--------------------------------------------------------------------------
-                // Write
-                //
-                // Write the current software statet to the devices registers.
-                //
-
-                void Write()
-                {
-
-                }
-
-        }; // end class Max2871
-
-    }
-}
-
+} // end namespace RFVSG 
 
 #endif

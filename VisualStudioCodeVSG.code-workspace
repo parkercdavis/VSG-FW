@@ -9,7 +9,15 @@
 	],
 	"settings": {
 		"files.associations": {
-			"cmath": "cpp"
+			"cmath": "cpp",
+			"__config": "cpp",
+			"cstddef": "cpp",
+			"exception": "cpp",
+			"new": "cpp",
+			"cstdint": "cpp",
+			"cstdio": "cpp",
+			"cstdlib": "cpp",
+			"type_traits": "cpp"
 		}
 	}
 }
