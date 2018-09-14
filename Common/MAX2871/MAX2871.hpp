@@ -15,6 +15,7 @@
 
 namespace RFVSG
 {
+    #pragma region Enumerations for MAX2871
 
     enum eFracNSigmaDeltaNoiseMode
     {
@@ -133,6 +134,8 @@ namespace RFVSG
         Reserved2,
         TunePin
     };
+
+    #pragma endregion
 
 
     class MAX2871
@@ -328,10 +331,11 @@ namespace RFVSG
 
         //-----------------------------------------------------
         //
-        std::function<void(int)>& ReadFunction;
+        std::function<void(int)> ReadFunction;
         
-        std::function<void(int)>& WriteFunction;
+        std::function<void(int)> WriteFunction;
 
+        // Update these to references to the DigitalIn/Out Pins!
         DigitalOut ChipEnable;
 
         DigitalIn LockDetect;
