@@ -9,6 +9,8 @@
 
 #include <functional>
 #include "stdint.h"
+
+#include "mbed.h"
 #include "Macros.h"
 
 namespace RFVSG
@@ -105,19 +107,6 @@ namespace RFVSG
         Div128
     };
 
-/*
-0000 = Three-state output
-0001 = D_VDD
-0010 = D_GND
-0011 = R-divider output 
-0100 = N-divider output/2 
-0101 = Analog lock detect 
-0110 = Digital lock detect 
-0111 = Sync Input
-1000 : 1011 = Reserved
-1100 = Read SPI registers 06 
-1101 : 1111= Reserved
-*/
     enum eMuxConfiguration
     {
         TriStateOutput,
@@ -133,6 +122,16 @@ namespace RFVSG
         Reserved3,
         Reserved4,
         ReadSPIRegister6
+    };
+
+
+    enum eADCMode
+    {
+        Disabled,
+        TempSensor,
+        Reserved1,
+        Reserved2,
+        TunePin
     };
 
 
@@ -335,7 +334,7 @@ namespace RFVSG
 
         DigitalOut ChipEnable;
 
-        DigitalIn LD;
+        DigitalIn LockDetect;
 
         DigitalOut RFOutputEnable;
 
@@ -348,20 +347,24 @@ namespace RFVSG
 
         #pragma region Constructors
 
-        MAX2871(std::function<void(int)> ReadFn, std::function<void(int)> WriteFn) : ReadFuncton(ReadFn), WriteFunction(WriteFn)
+        MAX2871(std::function<void(int)> ReadFn, std::function<void(int)> WriteFn, PinName ChipEnablePin, PinName LockDetectPin, PinName RFOutputEnablePin, PinName MuxPin, float RSetResistor)
+        : ChipEnable(ChipEnablePin), LockDetect(LockDetectPin), RFOutputEnable(RFOutputEnablePin), Mux(MuxPin), RSet(RSetResistor)
         {
 
             // Set the registers to their default values.
-            _R0 = 0x007D0000;
-            _R1 = 0x2000FFF9;
-            _R2 = 0x00004042;
-            _R3 = 0x0000000B;
-            _R4 = 0x6180B23C;
-            _R5 = 0x00400005;
+            _R0.Value = 0x007D0000;
+            _R1.Value = 0x2000FFF9;
+            _R2.Value = 0x00004042;
+            _R3.Value = 0x0000000B;
+            _R4.Value = 0x6180B23C;
+            _R5.Value = 0x00400005;
 
             // Note: Apart from setting the register value, we arent allowed to write to
             // this register. However, the read_function *can* write to this register.
-            _R6 = 0x00000006;
+            _R6.Value = 0x00000006;
+
+            ReadFunction = ReadFn;
+            WriteFunction = WriteFn;
         }
 
         #pragma endregion
@@ -655,7 +658,6 @@ namespace RFVSG
         #pragma endregion
 
 
-
         //-----------------------------------------------------
         //
         #pragma region VCO
@@ -887,15 +889,22 @@ namespace RFVSG
             _R5.Bits.MuxMSB = 1;
         }
 
-        
+
         bool IsPowerOnReset()
         {
-
+            return _R6.Bits.PowerOnReset;
         }
 
         uint8_t GetDieID()
         {
-            
+            if(_R6.Bits.DieID == 0b0110)
+            {
+                return 2870;
+            }
+            else
+            {
+                return 2871;
+            }
         }
 
         #pragma endregion
@@ -905,24 +914,35 @@ namespace RFVSG
         //
         #pragma region ADC
 
-        void SetADCMode()
-        {
 
+        void SetADCMode(eADCMode ADCMode)
+        {
+            if(ADCMode != 0b010 && ADCMode != 0b011)
+            {
+                _R5.Bits.ADCMode = ADCMode;
+            }
         }
 
-        void SetADCStart()
+        void EnableADCNormalOperation()
         {
-
+            _R5.Bits.ADCStart = 0;
         }
+
+        void StartADCConversion()
+        {
+            _R5.Bits.ADCStart = 1;
+        }
+
 
         bool IsADCValid()
-        {
-
+        {  
+            return _R6.Bits.ADCValid;
         }
+
 
         uint8_t GetADCCode()
         {
-
+            return _R6.Bits.ADCCode;
         }
 
         #pragma endregion
