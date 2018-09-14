@@ -72,6 +72,68 @@ namespace RFVSG
         ForceIntoSink
     };
 
+    enum eVCOFeedbackMode
+    {
+        Divided,
+        Fundamental
+    };
+
+
+    enum eRFOutputPowerLevels
+    {
+        MinusFourDBm,
+        MinusOneDBm,
+        PlusTwoDBm,
+        PlusFiveDBm
+    };
+
+    enum eRFOutputPath
+    {
+        VCODivided,
+        Fundamental
+    };
+
+    enum eRFOutputDividerMode
+    {
+        Div1,
+        Div2,
+        Div4,
+        Div8,
+        Div16,
+        Div32,
+        Div64,
+        Div128
+    };
+
+/*
+0000 = Three-state output
+0001 = D_VDD
+0010 = D_GND
+0011 = R-divider output 
+0100 = N-divider output/2 
+0101 = Analog lock detect 
+0110 = Digital lock detect 
+0111 = Sync Input
+1000 : 1011 = Reserved
+1100 = Read SPI registers 06 
+1101 : 1111= Reserved
+*/
+    enum eMuxConfiguration
+    {
+        TriStateOutput,
+        DigitalVdd,
+        DigitalGnd,
+        RDividerOutput,
+        NDividerOutputDivideBy2,
+        AnalogLockDetect,
+        DigitalLockDetect,
+        SyncInput,
+        Reserved1,
+        Reserved2,
+        Reserved3,
+        Reserved4,
+        ReadSPIRegister6
+    };
 
 
     class MAX2871
@@ -79,6 +141,10 @@ namespace RFVSG
 
     private:
         
+        //-----------------------------------------------------
+        //
+        #pragma region Registers
+
         //-----------------------------------------------------
         // Register 0
         // 
@@ -258,6 +324,7 @@ namespace RFVSG
 
         } _R6;
 
+        #pragma endregion
         
 
         //-----------------------------------------------------
@@ -614,34 +681,88 @@ namespace RFVSG
             _R4.Bits.VCOShutdown = 1;
         }
 
-        void SetVCOFeedbackMode()
+        void SetVCOFeedbackMode(eVCOFeedbackMode FeedbackMode)
         {
-            
+            _R4.Bits.VCOFeedbackMode = FeedbackMode;
         }
 
-        void ShutdownVCODivider(bool State)
+        
+        void EnableVCODivider()
         {
-
+            _R4.Bits.ShutdownVCODivider = 0;
         }
 
-        void ShutdownVCOLDO(bool State)
+        void DisableVCODivider()
         {
-            
+            _R4.Bits.ShutdownVCODivider = 1;
+        }
+
+
+        void EnableVCOLDO()
+        {
+            _R4.Bits.ShutdownVCOLDO = 0;
+        }
+
+        void DisableVCOLDO()
+        {
+            _R4.Bits.ShutdownVCOLDO = 0;
+        }
+
+
+        void EnableVCOAutoSelect()
+        {
+            _R3.Bits.VASShutdown = 0;
+        }
+
+
+        void DisableVCOAutoSelect()
+        {
+            _R3.Bits.VASShutdown = 1;
+        }
+
+
+        bool IsVCOAutoSelectEnabled()
+        {
+            return !_R3.Bits.VASShutdown;
+        }
+
+
+        void EnableVCOAutoSelectTempCompensation()
+        {
+            _R3.Bits.VASTemp = 1;
+        }
+
+        void DisableVCOAutoSelectTempCompensation()
+        {
+            _R3.Bits.VASTemp = 0;
+        }
+
+        bool IsVCOAutoSelectTempCompensationEnabled()
+        {
+            return _R3.Bits.VASTemp;
         }
 
         void SetVCOAutoselectDelay()
         {
-            
+            if(IsVCOAutoSelectTempCompensationEnabled())
+            {
+                _R5.Bits.VCOAutoselectDelay = 0b11;
+            }
+            else
+            {
+                _R5.Bits.VCOAutoselectDelay = 0b00;
+            }
         }
 
-        void GetCurrentVCO()
+        uint8_t GetCurrentVCO()
         {
-
+            return _R6.Bits.CurrentVCO;
         }
 
-        bool IsVCOAutoSelectEnabled()
+        
+        bool IsVCOAutoSelectSearching()
         {
-
+            return !_R6.Bits.VASActive;
         }
 
         #pragma endregion
@@ -650,44 +771,87 @@ namespace RFVSG
         //
         #pragma region RF Outputs
 
+
         void SetPhase(uint16_t Value)
         {
+            // We only use the top 12 bits.
+            Value &= 0x0FFF;
 
+            _R1.Bits.Phase = Value;
         }
 
-        void SetRFOutputAPower(uint8_t Power)
-        {
 
+        // Set RF Output A Power
+        //
+        void SetRFOutputAPower(eRFOutputPowerLevels PowerLevel)
+        {
+            _R4.Bits.RFOutputAPower = PowerLevel;
         }
 
-        void SetRFOutputAEnable(bool State)
-        {
 
+        void EnableRFOutputA()
+        {
+            _R4.Bits.RFAEnable = 1;
         }
 
-        void SetRFOutputBPower(uint8_t Power)
-        {
 
+        void DisableRFOutputA()
+        {
+            _R4.Bits.RFAEnable = 0;
         }
 
-        void SetRFOutputBEnable(bool State)
-        {
 
+        // 
+        //
+        void SetRFOutputBPower(eRFOutputPowerLevels PowerLevel)
+        {
+            _R4.Bits.RFOutputBPower = PowerLevel;
         }
 
-        void SetRFOutputBPath(bool Path)
-        {
 
+        void EnableRFOutputB()
+        {
+            _R4.Bits.RFBEnable = 1;
         }
 
-        void SetMuteUntilLockDetect(bool State)
-        {
 
+        void DisableRFOutputB()
+        {
+            _R4.Bits.RFBEnable = 0;
         }
 
-        void SetRFOutputDividerMode()
-        {
 
+        void SetRFOutputBPath(eRFOutputPath Path)
+        {
+            _R4.Bits.RFBOutputPath = Path;
+        }
+
+
+        void EnableMuteUntilLockDetect()
+        {   
+            _R4.Bits.MuteUntilLockDetect = 1;
+        }
+
+
+        void DisableMuteUntilLockDetect()
+        {
+            _R4.Bits.MuteUntilLockDetect = 0;
+        }
+
+
+        /*
+        000 = Divide by 1, if 3000MHz ≤ fRFOUTA ≤ 6000MHz
+        001 = Divide by 2, if 1500MHz ≤ fRFOUTA< 3000MHz
+        010 = Divide by 4, if 750MHz ≤ fRFOUTA < 1500MHz
+        011 = Divide by 8, if 375MHz ≤ fRFOUTA < 750MHz
+        100 = Divide by 16, if 187.5MHz ≤ fRFOUTA < 375MHz 
+        101 = Divide by 32, if 93.75MHz ≤ fRFOUTA < 187.5MHz 
+        110 = Divide by 64, if 46.875MHz ≤ fRFOUTA < 93.75MHz 
+        111 = Divide by 128, if 23.5MHz ≤ fRFOUTA< 46.875MHz
+        */
+        void SetRFOutputDividerMode(eRFOutputDividerMode DividerMode)
+        {
+            _R4.Bits.RFOutputDividerMode = DividerMode;
         }
 
         #pragma endregion
@@ -697,21 +861,33 @@ namespace RFVSG
         //
         #pragma region Digital Inputs/Outputs
         
-        void Shutdown(bool State)
+        void SWShutdown()
         {
-
+            _R2.Bits.Shutdown = 1;
         }
 
-        void SetMuxConfiguration(uint8_t Value)
-        {
 
+        void SWPowerOn()
+        {
+            _R2.Bits.Shutdown = 0;
         }
 
+
+        void SetMuxConfiguration(eMuxConfiguration MuxConfig)
+        {
+            _R2.Bits.MuxConfiguration = MuxConfig;
+        }
+
+
+        // 
+        // 
         void SetMuxMSB()
         {
-
+            // Verify!
+            _R5.Bits.MuxMSB = 1;
         }
 
+        
         bool IsPowerOnReset()
         {
 
@@ -780,15 +956,8 @@ namespace RFVSG
 
         
 
-        void SetVASTempResponseState(bool State)
-        {
+        
 
-        }
-
-        void SetVASShutdownState(bool State)
-        {
-
-        }
 
         void SetBandSelect(uint8_t Band)
         {
@@ -802,10 +971,7 @@ namespace RFVSG
 
         
 
-        bool IsVASActive()
-        {
-
-        }
+        
 
         #pragma endregion
 
