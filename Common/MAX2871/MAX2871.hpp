@@ -346,6 +346,8 @@ namespace RFVSG
 
         float RSet;
 
+        float ReferenceFrequency;
+
     
     public:
 
@@ -375,10 +377,17 @@ namespace RFVSG
 
         
         //-----------------------------------------------------
+        // PLL Methods
+        // 
+        // All methods that are related to the PLL can be found
+        // in this codeblock.
         //
+
         #pragma region PLL Methods
 
 
+        // Is Frac-N Mode 
+        //
         bool IsFractionalNMode()
         {
             return !_R0.Bits.IsIntegerMode;
@@ -419,6 +428,10 @@ namespace RFVSG
         }
 
 
+        // Set Modulus
+        // 
+        // 
+        // 
         void SetModulus(uint16_t Value)
         {
             // Value must always be greater than 1 and less than 4096.
@@ -576,8 +589,9 @@ namespace RFVSG
         }
 
 
-        // Enable Charge Pump High Impedance
+        // Enable/Disable Charge Pump High Impedance
         // 
+        //
         void EnableChargePumpHighZ()
         {
             _R2.Bits.ChargePumpHighZ = 1;
@@ -590,6 +604,10 @@ namespace RFVSG
         }
 
 
+        // Set Charge Pump Current
+        //
+        // 
+        // 
         void SetChargePumpCurrent(uint8_t Current)
         {
             // Only the lower four bits can be set.
@@ -599,6 +617,9 @@ namespace RFVSG
         }
 
 
+        // Calculate Charge Pump Current
+        //
+        // 
         //
         float CalculateChargePumpCurrent()
         {
@@ -616,14 +637,24 @@ namespace RFVSG
 
 
         // Set Reference Divider Value (R)
+        // 
+        // The reference divider can be from 1 to 1023.
+        // 
         void SetReferenceDividerValue(uint16_t Value)
         {
             // Only the top 10 bits can be set.
             Value &= 0x3FF;
 
+            // The min reference divider value is 1.
+            if(Value == 0) Value = 1;
+
             _R2.Bits.ReferenceDividerValue = Value;
         }
 
+
+        // Enable/Disable Reference Divider (/2)
+        //
+        //
 
         void EnableReferenceDivideBy2()
         {
@@ -637,6 +668,13 @@ namespace RFVSG
         }
 
 
+        // Enable/Disable Reference Doubler
+        // 
+        // Min reference frequency is 10 MHz.
+        // Max reference frequency is 105 MHz when the doubler is on.
+        // Max reference frequency is 210 MHz when the doubler is off.
+        //
+
         void EnableReferenceDoubler()
         {
             _R2.Bits.ReferenceDoublerMode = 1;
@@ -648,6 +686,11 @@ namespace RFVSG
             _R2.Bits.ReferenceDoublerMode = 0;
         }
 
+
+        // Enable/Disable Reference Input
+        //
+        //  
+        //
         void EnableReferenceInput()
         {
             _R4.Bits.ShutdownReferenceInput = 0;
@@ -657,6 +700,22 @@ namespace RFVSG
         {
             _R4.Bits.ShutdownReferenceInput = 1;
         }
+
+
+        // Set PFD Frequency
+        //
+        // Assume DBR and RDIV2 are set accordingly.
+        //
+        // f_PFD = f_REF * ((1+DBR)/(R * (1 + RDIV2)))
+        //
+        // 
+
+        void SetPFDFrequency(float Frequency)
+        {
+            // R = (ReferenceFrequency/Frequency)*((1+DBR)/(1+RDIV));
+        }
+
+        
 
 
         #pragma endregion
@@ -989,6 +1048,15 @@ namespace RFVSG
         }
 
         void SetBandSelectMSB()
+        {
+
+        }
+
+        // Set Frequency
+        // 
+        // Set the frequency of operation for the device.
+        //
+        void SetFrequency(float Frequency)
         {
 
         }
