@@ -1,0 +1,75 @@
+#pragma region Virtual Methods
+
+        // SetAttenuation
+        // 
+        // Set the attenuation using either serial/parallel code. 
+        // We let the inheriting class define this method.
+        //
+        virtual void InternalSetAttenuation(uint8_t AttenValue) = 0;
+
+        #pragma endregion
+
+
+        #pragma region Methods
+
+        // SetAttenuation
+        // 
+        // Set the amount of attenuation.
+        //
+        void SetAttenuation(float AttenValue)
+        {
+            _AttenuationByte = PE43711::FloatToByte(AttenValue);
+
+            InternalSetAttenuation(_AttenuationByte);
+        }
+
+        void SetAttenuation(uint8_t AttenValue)
+        {
+            InternalSetAttenuation(_AttenuationByte);
+        }
+
+
+        // Get Attenuation
+        //
+        // Return the value of the attenuation as a floating point number.
+        //
+        float GetAttenuation()
+        {
+            return PE43711::ByteToFloat(_AttenuationByte);
+        }
+
+        #pragma endregion
+
+
+        #pragma region Operator Overloads
+
+        // Assign operator
+        //
+        // For float values, we want to set the value of attenuation.
+        //
+        PE43711& operator =(float TheFloat)
+        {
+            SetAttenuation(PE43711::FloatToByte(TheFloat));
+
+            return *this;
+        }
+
+
+        PE43711& operator =(uint8_t TheByte)
+        {
+            SetAttenuation(TheByte);
+
+            return *this;
+        }
+
+        inline operator float ()
+        {
+            return PE43711::ByteToFloat(_AttenuationByte);
+        }
+
+        inline operator uint8_t ()
+        {
+            return _AttenuationByte;
+        }
+
+        #pragma endregion

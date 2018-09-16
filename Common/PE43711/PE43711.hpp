@@ -10,6 +10,7 @@
 
 #include "mbed.h"
 #include <math.h>
+#include <functional>
 
 namespace Common
 {
@@ -20,27 +21,46 @@ namespace Common
         // AttenuationByte
         //
         //
-        uint8_t _AttenuationByte;
+        uint8_t AttenuationByte;
 
 
-    protected:
+    private:
 
         // Parallel/Serial Select Line
+        // 
         //
-        DigitalOut _PS;
+        DigitalOut& PS;
 
 
         // Latch Enable
         //
+        // Equivalent to the CS pin.
         //
-        DigitalOut _LE;
+        DigitalOut& LE;
+
+
+        // Digital Pins
+        // 
+        DigitalOut& D0;
+        DigitalOut& D1; 
+        DigitalOut& D2; 
+        DigitalOut& D3; 
+        DigitalOut& D4; 
+        DigitalOut& D5; 
+        DigitalOut& D6; 
+        DigitalOut& D7;
+
+
+        // Write Function
+        //
+        // An anonymous function that allows the programmer
+        // to abstract away the SPI interface from the PE43711 firmware.
+        // 
+        std::function<void()> WriteFunction;
 
 
     public:
         
-        PE43711();
-        virtual ~PE43711();
-
         #pragma region Static Methods
 
         // Byte To Float
@@ -106,81 +126,36 @@ namespace Common
         #pragma endregion
 
 
-        #pragma region Virtual Methods
+        #pragma region Constructors
 
-        // SetAttenuation
-        // 
-        // Set the attenuation using either serial/parallel code. 
-        // We let the inheriting class define this method.
-        //
-        virtual void InternalSetAttenuation(uint8_t AttenValue) = 0;
+        PE43711(DigitalOut& PSPin, DigitalOut& LEPin, std::function<void()> WriteFn)
+        {
+            PS = PSPin;
+            LE = LEPin;
+            WriteFunction = WriteFn;
+        }
 
+        PE43711(DigitalOut& PSPin, 
+                DigitalOut& LEPin, 
+                DigitalOut& D0Pin, 
+                DigitalOut& D1Pin, 
+                DigitalOut& D2Pin, 
+                DigitalOut& D3Pin, 
+                DigitalOut& D4Pin, 
+                DigitalOut& D5Pin, 
+                DigitalOut& D6Pin, 
+                DigitalOut& D7Pin), : 
+                PS(PSPin), LE(LEPin), 
+                D0(D0Pin), D1(D1Pin), 
+                D2(D2Pin), D3(D3Pin), 
+                D4(D4Pin), D5(D5Pin), 
+                D6(D6Pin), D7(D7Pin)
+        {
+
+        }
+        
         #pragma endregion
-
-
-        #pragma region Methods
-
-        // SetAttenuation
-        // 
-        // Set the amount of attenuation.
-        //
-        void SetAttenuation(float AttenValue)
-        {
-            _AttenuationByte = PE43711::FloatToByte(AttenValue);
-
-            InternalSetAttenuation(_AttenuationByte);
-        }
-
-        void SetAttenuation(uint8_t AttenValue)
-        {
-            InternalSetAttenuation(_AttenuationByte);
-        }
-
-
-        // Get Attenuation
-        //
-        // Return the value of the attenuation as a floating point number.
-        //
-        float GetAttenuation()
-        {
-            return PE43711::ByteToFloat(_AttenuationByte);
-        }
-
-        #pragma endregion
-
-
-        #pragma region Operator Overloads
-
-        // Assign operator
-        //
-        // For float values, we want to set the value of attenuation.
-        //
-        PE43711& operator =(float TheFloat)
-        {
-            SetAttenuation(PE43711::FloatToByte(TheFloat));
-
-            return *this;
-        }
-
-
-        PE43711& operator =(uint8_t TheByte)
-        {
-            SetAttenuation(TheByte);
-
-            return *this;
-        }
-
-        inline operator float ()
-        {
-            return PE43711::ByteToFloat(_AttenuationByte);
-        }
-
-        inline operator uint8_t ()
-        {
-            return _AttenuationByte;
-        }
-
-        #pragma endregion
+        
 
 
     }; // end class PE43711
