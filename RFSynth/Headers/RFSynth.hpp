@@ -11,8 +11,6 @@
 #ifndef RFSYNTH_HPP
 #define RFSYNTH_HPP
 
-#include "mbed.h"
-#include "stdint.h"
 
 namespace RFVSG
 {
@@ -31,7 +29,12 @@ namespace RFVSG
             MuteRF,
         };
 
-        int RFSynth();
+
+        enum ePinout
+        {
+            NO_PIN,
+            
+        };
     }
 }
 
