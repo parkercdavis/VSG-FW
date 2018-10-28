@@ -7,8 +7,9 @@
 #include <Wire.h>
 
 
-#include "RFSynth.hpp"
+#include <../Common/ADRF5250/ADRF5250>
 
+//----------------------------------------------------------------------
 // Pinout of Arduino Nano
 
 #define MASTER_INT_PIN  2
@@ -26,6 +27,7 @@
 #define DAC_CLR_PIN     A3
 
 
+//----------------------------------------------------------------------
 // Master Commands
 //
 // A list of all the commands that the master can send to the slave.
@@ -33,13 +35,71 @@
 //
 enum eMasterCommands
 {
-    SetFrequency,
-    SetPower,
-    SetVSGMode,
-    MuteRF,
+    //----------------------------------------------------------------------
+    // Misc commands
+    
+    // The VSG can be in CW (just a sine wave) mode OR vector mod mode.
+    // In CW mode, the output power is fixed at a given frequency, and the
+    // LO portions of the synthesizer are all stutdown.
+    SetVSGToCWMode,
+
+    SetVSGToVectorMode,
+
+    // Turn off the synth for power savings.
+    ShutdownSynth,
+
+    //----------------------------------------------------------------------
+    // CW Commands
+
+    // Set the filter bank filter for the CW output.
+    SetCWFilter,
+
+    // Set the CW output power using the attenuator.
+    SetCWPower,
+
+    //----------------------------------------------------------------------
+    // LO commands
+
+    // Set the LO power to a given power level using the attenuator.
+    SetLOPower,
+
+    //----------------------------------------------------------------------
+    // Synthesizer commands
+
+    // Set the frequency output from the synth IC. This effects both CW and
+    // LO outputs.
+    SetSynthFrequency,
+
+    // Set the output power coming from the synth IC. There are only 4 power
+    // levels that can be chosen from.
+    SetSynthPower,
+
+    // Mute the RF outputs from the synth IC.
+    SynthMuteRF,
 };
 
 
+//----------------------------------------------------------------------
+// Global variables
+//
+//
+
+// I2C data received from the master.
+volatile byte I2CPacket[32] = {0};
+
+// I2C event happened and we need to do something.
+volatile bool I2CInterruptOccured = false;
+
+// Initialize the filter bank switch.
+// Digital circuitry onboard takes care of the other filter bank IC.
+ADRF5250 LOFilterBankSwitch(SP5T_V1_PIN, SP5T_V2_PIN, SP5T_V3_PIN);
+
+
+//----------------------------------------------------------------------
+// Setup
+//
+// The setup function runs once and setup... No way!
+//
 
 void setup()
 {
@@ -84,9 +144,66 @@ void setup()
 }
 
 
+//----------------------------------------------------------------------
+//
+// Loop
+//
+// The loop runs continuously.
+
 void loop()
 {
-    // Do something here.
+    // If an event happened then we need to process the event!
+    if(I2CInterruptOccured)
+    {
+        // Set the flag back to false so we only handle it once.
+        I2CInterruptOccured = false;
+
+        // Check the command byte first to see what happened.
+        switch(I2CPacket[0])
+        {
+            case eMasterCommands::SetVSGToCWMode:
+
+                // Turn off the LO circuitry.
+
+            break;
+
+            case eMasterCommands::SetVSGToVectorMode:
+
+            break;
+            
+            case eMasterCommands::ShutdownSynth:
+
+            break;
+
+            case eMasterCommands::SetCWFilter:
+
+            break;
+
+            case eMasterCommands::SetCWPower:
+
+            break;
+
+            case eMasterCommands::SetLOPower:
+
+            break;
+
+            case eMasterCommands::SetSynthFrequency:
+
+            break;
+
+            case eMasterCommands::SetSynthPower:
+
+            break;
+
+            case eMasterCommands::SynthMuteRF:
+
+            break;
+        }
+
+    }
+
+    // Just hang out and do nothing if no event has happened.
+    delay(100);
 }
 
 
@@ -96,14 +213,19 @@ void loop()
 // is trying to send a new command to this device. We should stop what
 // we are doing and receive data over I2C.
 
-void MasterInterruptHandler()
+void MasterInterruptHandler(int NumberOfBytes)
 {
-    
     // Read the information from the master device over I2C.
     // The wire library uses a 32 byte buffer so thats all we have.
 
+    while(1 < Wire.available())
+    {
+        I2CPacket[i] = Wire.read();
+    }
 
+    int x = Wire.read(); // Read the last byte out.
 
+    I2CInterruptOccured = true;
 }
 
 
